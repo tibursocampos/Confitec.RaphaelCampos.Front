@@ -1,0 +1,77 @@
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-lg">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" formControlName="firstName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && fcontrol.firstName.errors }" />
+          <div *ngIf="submitted && fcontrol.firstName.errors" class="invalid-feedback">
+            <div *ngIf="fcontrol.firstName.errors.required">Nome é obrigatório</div>
+            <div *ngIf="fcontrol.firstName.errors.minlength">
+              Nome dever ter no mínimo 3 caracteres
+            </div>
+            <div *ngIf="fcontrol.firstName.errors.maxlength">
+              Nome dever ter no máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Sobrenome</label>
+          <input type="text" formControlName="lastName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && fcontrol.lastName.errors }" />
+          <div *ngIf="submitted && fcontrol.lastName.errors" class="invalid-feedback">
+            <div *ngIf="fcontrol.lastName.errors.required">Sobrenome é obrigatório</div>
+            <div *ngIf="fcontrol.lastName.errors.minlength">
+              Sobrenome dever ter no mínimo 3 caracteres
+            </div>
+            <div *ngIf="fcontrol.lastName.errors.maxlength">
+              Sobrenome dever ter no máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" formControlName="userEmail" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && fcontrol.userEmail.errors }" />
+          <div *ngIf="submitted && fcontrol.userEmail.errors" class="invalid-feedback">
+            <div *ngIf="fcontrol.userEmail.errors.required">Email é obrigatório</div>
+            <div *ngIf="fcontrol.userEmail.errors.email">Email inválido</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="form-group">
+          <label>Data de nascimento</label>
+          <input type="date" formControlName="userBirthdayDate" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && fcontrol.userBirthdayDate.errors }" />
+          <div *ngIf="submitted && fcontrol.userBirthdayDate.errors" class="invalid-feedback">
+            <div *ngIf="fcontrol.userBirthdayDate.errors!.required">Data de nascimento é obrigatória</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="schoolingLab">Escolaridade</label>
+          <select formControlName="schooling" class="form-control" id="schoolingLab"
+            [ngClass]="{ 'is-invalid': submitted && fcontrol.schooling.errors }">
+            <option *ngFor="let item of schoolingList let i = index" [ngValue]="i">
+              <div>{{item}}</div>
+            </option>
+          </select>
+          <div *ngIf="submitted && fcontrol.schooling.errors" class="invalid-feedback">
+            <div *ngIf="fcontrol.schooling.errors.required">Escolaridade é obrigatória</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="form-group">
+        <div class="col-lg-2 d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary m-2">Registrar</button>
+          <button type="button" (click)="onReset()" class="btn btn-warning float-right m-2">
+            Limpar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

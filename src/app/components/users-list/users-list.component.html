@@ -1,0 +1,41 @@
+<div class="row d-flex justify-content-around">
+  <div class="input-group mb-3 col d-flex">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" [(ngModel)]="searchEmail" placeholder="Buscar usuário por email"
+      aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" (click)="searchByEmail()">Buscar</button>
+  </div>
+  <div class="input-group-append col d-flex justify-content-end align-items-start">
+    <button class="btn btn-outline-secondary me-2" type="button" (click)="loadUsers()">Exibir Todos</button>
+    <button class="btn btn-outline-primary" type="button" routerLinkActive='active' routerLink='/add'>Novo
+      Usuário</button>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead class="text-center ">
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Data de Nascimento</th>
+      <th scope="col">Escolaridade</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+    <tr *ngFor="let user of users">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.userEmail }}</td>
+      <td>{{ user.userBirthdayDate | date:"dd/MM/yyyy" }}</td>
+      <td>{{ user.schooling | schooling: user.schooling}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button (click)="editUser(user.id)" type="button" class="btn btn-outline-secondary">Editar</button>
+          <button (click)="removeUser(user.id)" type="button" class="btn btn-outline-danger">Excluir</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
